@@ -1,0 +1,42 @@
+<launch>
+
+  <arg name="dataset_name" value="RealSenseIR"/>
+
+  
+
+  <arg name="sensor_config_path" default="$(find kimera_vio)/params"/>
+  <arg name="sensor_config_name" default="$(arg dataset_name)"/>
+  <arg name="sensor_folder" value="$(arg sensor_config_path)/$(arg sensor_config_name)"/>
+
+
+  <arg name="use_lcd" default="true"/>  
+  <arg name="lcd_no_detection" default="true"/>
+
+  <arg name="online" default="true" />
+  <arg name="do_coarse_temporal_sync" default="false"/>
+  <arg name="do_fine_temporal_sync" default="false"/>
+
+  <arg name="log_output" default="false"/>
+  <arg name="log_output_path"
+       default="$(find kimera_vio_ros)/output_logs/"
+       if="$(arg log_output)"/>
+  <arg name="log_gt_data" default="false"/>
+  <arg name="gt_topic" default=""/>
+  
+  <arg name="should_use_sim_time" default="true"/>
+
+  <arg name="odom_frame_id"      value="odom"/>
+  <arg name="base_link_frame_id" value="base_link_kimera"/>
+  <arg name="map_frame_id"       value="map"/>
+  
+  
+  <arg name="left_cam_frame_id"  value="camera_color_optical_frame"/>
+  <arg name="right_cam_frame_id" value="right_cam"/>
+
+  <arg name="left_cam_topic"  value="/camera/infra1/image_rect_raw"/>
+  <arg name="right_cam_topic" value="/camera/infra2/image_rect_raw"/>
+  <arg name="imu_topic"       value="/camera/imu"/>
+
+  <include file="$(find kimera_vio_ros)/launch/kimera_vio_ros.launch" pass_all_args="true"/>
+
+  </launch>
